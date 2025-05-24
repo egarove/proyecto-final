@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2025 a las 21:48:41
+-- Tiempo de generación: 24-05-2025 a las 22:25:40
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -72,16 +72,6 @@ INSERT INTO `alumnos` (`id`, `nombre`, `apellidos`, `clase`, `dni`, `edad`, `gen
 ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `dni` (`dni`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -150,8 +150,29 @@ public class GestionAlumnos {
         System.out.print("Introduce third score: ");
         int score3= keyboard.nextInt();
         
-        Student alumno= new Student (id,name,surname,studentClass,dni,age,gender,
-        phone,score1,score2,score3);
+        if(studentExists(id, myStudents)){
+            System.out.println("this id already exists!");
+        } else{
+            try{
+                Student alumno= new Student (id,name,surname,studentClass,dni,age,gender,
+                phone,score1,score2,score3);
+            
+                myStudents.add(alumno);
+            
+                Statement consulta = conexion.createStatement();
+                consulta.execute(
+                    "INSERT INTO alumnos " +
+                    "(id, nombre, apellidos, clase, dni, edad, genero, telefono, nota1trim, nota2trim, nota3trim) " +
+                    "VALUES (" +
+                    id + ", '" + name + "', '" + surname + "', '" + studentClass + "', '" + dni + "', " +
+                    age + ", '" + gender + "', '" + phone + "', " +
+                    score1 + ", " + score2 + ", " + score3 + ");"
+                );
+            } catch(){
+            System.out.println(e.getMessage());
+            System.out.println("Invalid data... couldnt create student");
+            } 
+        }
     }
     
     public static void deleteStudent (Connection conexion, ArrayList<Student> myStudents){

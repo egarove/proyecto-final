@@ -1,0 +1,36 @@
+Compilados de Java,
+*.class
+*.jar
+*.war
+*.ear
+
+Carpetas de construcción,
+/build/
+/dist/
+
+Archivos generados por NetBeans,
+nbproject/private/
+/nbproject/private/
+/build/
+**/dist/
+
+Archivos de logs,
+*.log
+
+Archivos de configuración de entorno,
+*.iml
+*.ipr
+*.iws
+
+Archivos de sistema,
+.DS_Store
+Thumbs.db
+
+IntelliJ IDEA (si lo usas ocasionalmente),
+.idea/
+out/
+
+Archivos relacionados con Maven o Gradle (opcional),
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.gradle/

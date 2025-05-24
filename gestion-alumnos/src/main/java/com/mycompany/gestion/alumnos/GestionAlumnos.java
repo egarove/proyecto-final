@@ -4,6 +4,17 @@
 
 package com.mycompany.gestion.alumnos;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Eloy Garofano Velazquez/Sebastian Rodriguez Rodriguez
@@ -11,6 +22,42 @@ package com.mycompany.gestion.alumnos;
 public class GestionAlumnos {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        String url= "jdbc:mysql://localhost:3306/colegio";
+        String user= "root";
+        String password= "";
+        
+        ArrayList<Student> myStudents = new ArrayList<>();
+        
+        try{
+            //cargamos el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        
+            //establecemos conexion
+            Connection conexion= DriverManager.getConnection(url,user,password);
+        
+                //si ha salido bien (NO SALTA AL CATCH)
+                System.out.println("ABLE TO CONNECT DATABASE");
+            
+                //crear un Statement y ejecutar una consulta
+                Statement consulta= (Statement) conexion.createStatement();
+                
+                //obtenemos el resultado de la consulta
+                ResultSet resultado = consulta.executeQuery("SELECT * FROM alumnos");
+                
+                //recorremos las filas devueltas por la db
+                while(resultado.next()){
+                
+                
+                
+                }
+        
+            resultado.close();
+            consulta.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

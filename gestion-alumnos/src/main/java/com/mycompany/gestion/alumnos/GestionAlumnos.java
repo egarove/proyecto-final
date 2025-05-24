@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +30,7 @@ public class GestionAlumnos {
         String password= "";
         
         ArrayList<Student> myStudents = new ArrayList<>();
+        
         
         try{
             //cargamos el driver
@@ -56,7 +59,6 @@ public class GestionAlumnos {
                     int age= resultado.getInt("edad");
                     char gender= resultado.getString("genero").charAt(0);
                     String phoneNumber= resultado.getString("telefono");
-                    Date entryDate= resultado.getDate("fecha_ingreso");
                     double score1= resultado.getDouble("nota1trim");
                     double score2= resultado.getDouble("nota2trim");
                     double score3= resultado.getDouble("nota3trim");
@@ -64,18 +66,121 @@ public class GestionAlumnos {
                     System.out.println(score1);
                     
                     Student alumno = new Student (id,name,surname,studentClass,
-                    dni,age,gender,phoneNumber,entryDate,score1,score2,score3);
+                    dni,age,gender,phoneNumber,score1,score2,score3);
                 
+                    //añadimos el alumno a la coleccion
                     myStudents.add(alumno);
-                
                 }
-        
-            resultado.close();
-            consulta.close();
+                //Cerramos los recursos        
+                resultado.close();
+                consulta.close();
+                
+                //MOSTRAR MENU
+                int choice= 0;
+                while(choice!= 1 && choice != 2 && choice!= 3){
+                    choice= menu();
+                }
+                switch (choice) {
+                    case 1: listStudents(myStudents);
+                        break;
+                    case 2: addStudent(conexion, myStudents);
+                        break;
+                    case 3: deleteStudent(conexion, myStudents);
+                        break;
+                }
+                
+                //Cerramos recursos
+                conexion.close();
+                
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
     }
+    
+    public static int menu(){
+        Scanner keyboard= new Scanner (System.in);
+        
+        System.out.println("1. Listar alumnos");
+        System.out.println("2. Añadir alumno");
+        System.out.println("3. Eliminar alumno");
+        System.out.println("4. Salir");
+        
+        try{
+            int choice= keyboard.nextInt();
+            return choice;
+        } catch (InputMismatchException e){
+            System.out.println("Error... Introduce 1, 2 or 3!");
+            return 0;
+        }
+    }
+    
+    public static void listStudents(ArrayList<Student> myStudents){
+        System.out.println("\n---SHOWING STUDENTS---");
+        for (Object myStudent : myStudents) {
+            System.out.println(myStudent);
+        }
+        System.out.println("---END OF THE LIST---");
+    }
+    
+    public static void addStudent(Connection conexion, ArrayList<Student> myStudents){
+        Scanner keyboard= new Scanner (System.in);
+        System.out.println("\n---ADD A NEW STUDENT---");
+        System.out.print("Introduce id: ");
+        int id= keyboard.nextInt();
+        System.out.print("Introduce name: ");
+        String name= keyboard.next();
+        System.out.print("Introduce surname: ");
+        String surname= keyboard.next();
+        System.out.print("Introduce class: ");
+        char studentClass= keyboard.next().charAt(0);
+        System.out.print("Introduce dni: ");
+        String dni= keyboard.next();
+        System.out.print("Introduce age: ");
+        int age= keyboard.nextInt();
+        System.out.print("Introduce gender: ");
+        char gender= keyboard.next().charAt(0);
+        System.out.print("Introduce phone number: ");
+        String phone= keyboard.next();
+        System.out.print("Introduce first score: ");
+        int score1= keyboard.nextInt();
+        System.out.print("Introduce second score: ");
+        int score2= keyboard.nextInt();
+        System.out.print("Introduce third score: ");
+        int score3= keyboard.nextInt();
+        
+        Student alumno= new Student (id,name,surname,studentClass,dni,age,gender,
+        phone,score1,score2,score3);
+    }
+    
+    public static void deleteStudent (Connection conexion, ArrayList<Student> myStudents){
+        Scanner keyboard = new Scanner (System.in);
+        System.out.print("Introduce id to remove: ");
+        int idRemove= keyboard.nextInt();
+        
+        //comprobamos si existe
+        if(studentExists(idRemove, myStudents)){
+            try {
+                Statement consulta= conexion.createStatement();
+                consulta.execute("DELETE FROM alumnos WHERE id = "+idRemove+";");
+                myStudents.removeIf(student -> student.getId() == idRemove);
+                System.out.println("student "+idRemove+" deleted.");
+                //cerramos recursos
+                consulta.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }else{
+            System.out.println("Student does not exists!");
+        }
+    }
+    
+    public static boolean studentExists(int idRemove, ArrayList<Student> myStudents){
+        for (Object myStudent : myStudents) {
+            if(myStudent.getId()==idRemove) return true;
+        }
+        return false;
+    }
+    
 }

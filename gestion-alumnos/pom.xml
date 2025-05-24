@@ -11,4 +11,12 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.mycompany.gestion.alumnos.GestionAlumnos</exec.mainClass>
     </properties>
+    <dependencies>
+        <!-- Dependencia de MySQL Connector/J -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.29</version> <!-- Asegúrate de usar la versión más reciente disponible -->
+        </dependency>
+    </dependencies>
 </project>

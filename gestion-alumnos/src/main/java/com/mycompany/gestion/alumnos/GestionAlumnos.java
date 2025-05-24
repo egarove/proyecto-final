@@ -6,7 +6,7 @@ package com.mycompany.gestion.alumnos;
 
 /**
  *
- * @author eloy/sebastian
+ * @author Eloy Garofano Velazquez/Sebastian Rodriguez Rodriguez
  */
 public class GestionAlumnos {
 

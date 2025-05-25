@@ -105,7 +105,7 @@ public class GestionAlumnos {
     public static int menu() {
         Scanner keyboard = new Scanner(System.in);
 
-        System.out.println("1. Listar alumnos");
+        System.out.println("1. Gestionar Alumnos");
         System.out.println("2. Añadir alumno");
         System.out.println("3. Eliminar alumno");
         System.out.println("4. Salir");
@@ -129,7 +129,7 @@ public class GestionAlumnos {
 
     public static void addStudent(Connection conexion, ArrayList<Student> myStudents) {
         Scanner keyboard = new Scanner(System.in);
-        try {
+        try { 
             System.out.println("\n---ADD A NEW STUDENT---");
             System.out.print("Introduce id: ");
             int id = keyboard.nextInt();
@@ -209,4 +209,38 @@ public class GestionAlumnos {
         return false;
     }
 
+    public static void manageStudents(Statement consulta) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            ResultSet resultado = consulta.executeQuery("SELECT * FROM alumnos");
+
+            while (resultado.next()) {
+
+                int id = resultado.getInt("id");
+                String name = resultado.getString("nombre");
+                String surname = resultado.getString("apellidos");
+                char studentClass = resultado.getString("clase").charAt(0);
+                String dni = resultado.getString("dni");
+                int age = resultado.getInt("edad");
+                String gender = resultado.getString("genero");
+                String phoneNumber = resultado.getString("telefono");
+                double score1 = resultado.getDouble("nota1trim");
+                double score2 = resultado.getDouble("nota2trim");
+                double score3 = resultado.getDouble("nota3trim");
+
+                System.out.println(score1);
+
+                Student alumno = new Student(id, name, surname, studentClass,
+                        dni, age, gender, phoneNumber, score1, score2, score3);
+
+                students.add(alumno);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Something went wrong while extracting students from database. " + ex.getMessage());
+        } catch (StudentCreationException ex) {
+            System.out.println("something went wrong while creating each student");
+        }
+        
+        
+    }
 }

@@ -172,7 +172,11 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", studentClass=" + studentClass + ", dni=" + dni + ", age=" + age + ", gender=" + gender + ", phoneNumber=" + phoneNumber + ", grades=" + grades + '}';
+        String msg = ("ID:" + id + " | " + name + " " + surname + " | Age: " + age + " | Gender: " + gender + 
+                " | Phone number: " + phoneNumber + " | DNI: " + dni + " | Group: " + studentClass + " | Grades: " +
+                grades[0] + " " + grades[1] + " " + grades[2] + " | Average: " + Arrays.stream(grades).average() );
+        
+        return msg;
     }
     
     

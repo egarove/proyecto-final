@@ -88,11 +88,14 @@ public class StudentsManagement {
     public static void searchId(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Introduce an id");
-        int id = sc.nextInt();
+        
+        int id;
         boolean found= false; 
         
         try {
+            System.out.println("Introduce an id");
+            id= sc.nextInt();
+            
             for (Student student : students) {
                 if(student.getId()==id){
                     System.out.println(student);

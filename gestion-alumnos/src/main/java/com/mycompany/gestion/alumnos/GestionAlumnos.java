@@ -61,7 +61,7 @@ public class GestionAlumnos {
                         System.out.println("Invalid option. please, introduce a valid one");
                 }
             }
-          
+
             //Cerramos recursos
             conexion.close();
 
@@ -88,38 +88,38 @@ public class GestionAlumnos {
             return 0;
         }
     }
-    
+
     public static void addStudent(Connection conexion) {
         Scanner keyboard = new Scanner(System.in);
         try {
             System.out.println("\n---ADD A NEW STUDENT---");
             System.out.print("Introduce id: ");
             int id = keyboard.nextInt();
-            System.out.print("Introduce name: ");
-            String name = keyboard.next();
-            System.out.print("Introduce surname: ");
-            keyboard.nextLine(); // limpiar buffer 
-            String surname = keyboard.nextLine();   
-            System.out.print("Introduce class: ");
-            char studentClass = keyboard.next().charAt(0);
-            System.out.print("Introduce dni: ");
-            String dni = keyboard.next();
-            System.out.print("Introduce age: ");
-            int age = keyboard.nextInt();
-            System.out.print("Introduce gender: ");
-            String gender = keyboard.next();
-            System.out.print("Introduce phone number: ");
-            String phone = keyboard.next();
-            System.out.print("Introduce first score: ");
-            int score1 = keyboard.nextInt();
-            System.out.print("Introduce second score: ");
-            int score2 = keyboard.nextInt();
-            System.out.print("Introduce third score: ");
-            int score3 = keyboard.nextInt();
-
             if (studentExists(id, conexion)) {
                 System.out.println("this id already exists!");
             } else {
+                System.out.print("Introduce name: ");
+                String name = keyboard.next();
+                System.out.print("Introduce surname: ");
+                keyboard.nextLine(); // limpiar buffer 
+                String surname = keyboard.nextLine();
+                System.out.print("Introduce class: ");
+                char studentClass = keyboard.next().charAt(0);
+                System.out.print("Introduce dni: ");
+                String dni = keyboard.next();
+                System.out.print("Introduce age: ");
+                int age = keyboard.nextInt();
+                System.out.print("Introduce gender: ");
+                String gender = keyboard.next();
+                System.out.print("Introduce phone number: ");
+                String phone = keyboard.next();
+                System.out.print("Introduce first score: ");
+                int score1 = keyboard.nextInt();
+                System.out.print("Introduce second score: ");
+                int score2 = keyboard.nextInt();
+                System.out.print("Introduce third score: ");
+                int score3 = keyboard.nextInt();
+
                 Student alumno = new Student(id, name, surname, studentClass, dni, age, gender, phone, score1, score2, score3);
 
                 Statement consulta = conexion.createStatement();
@@ -131,8 +131,9 @@ public class GestionAlumnos {
                         + age + ", '" + gender + "', '" + phone + "', "
                         + score1 + ", " + score2 + ", " + score3 + ");"
                 );
+                System.out.println("Student added succesfully!");
             }
-            System.out.println("Student added succesfully!");
+            
         } catch (StudentCreationException ex) {
             System.out.println("Student creation interrupted. Reason: " + ex.getMessage());
         } catch (SQLException ex) {
@@ -144,21 +145,26 @@ public class GestionAlumnos {
 
     public static void deleteStudent(Connection conexion) {
         Scanner keyboard = new Scanner(System.in);
-        System.out.print("Introduce id to remove: ");
-        int idRemove = keyboard.nextInt();
+        try {
+            System.out.print("Introduce id to remove: ");
+            int idRemove = keyboard.nextInt();
 
-        //comprobamos si existe
-        if (studentExists(idRemove, conexion)) {
-            try (Statement consulta = conexion.createStatement()){
-                consulta.execute("DELETE FROM alumnos WHERE id = " + idRemove + ";");
-                System.out.println("student " + idRemove + " deleted.");
-                
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+            //comprobamos si existe
+            if (studentExists(idRemove, conexion)) {
+                try (Statement consulta = conexion.createStatement()) {
+                    consulta.execute("DELETE FROM alumnos WHERE id = " + idRemove + ";");
+                    System.out.println("student " + idRemove + " deleted.");
+
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+                System.out.println("Student does not exists!");
             }
-        } else {
-            System.out.println("Student does not exists!");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please, introduce a valid id");
         }
+
     }
 
     public static boolean studentExists(int id, Connection conexion) {
@@ -195,7 +201,6 @@ public class GestionAlumnos {
                 double score2 = resultado.getDouble("nota2trim");
                 double score3 = resultado.getDouble("nota3trim");
 
-
                 Student student = new Student(id, name, surname, studentClass,
                         dni, age, gender, phoneNumber, score1, score2, score3);
 
@@ -210,38 +215,37 @@ public class GestionAlumnos {
 
         return students;
     }
-    
-    
+
     /*--------------------------*/
-    public static void manageStudents(ArrayList<Student> students){
+    public static void manageStudents(ArrayList<Student> students) {
         //Aquí se crearán las opciones para filtrar por cada campo
         StudentsManagement.setStudents(students);
         //Menu inicial
-            boolean endProgram = false;
-            while (!endProgram) {
-                switch (menuManagement()) {
-                    case 1:
-                        StudentsManagement.showStudents();
-                        break;
-                    case 2:
-                        sorting();
-                        break;
-                    case 3:
-                        filter();
-                        break;
-                    case 4:
-                        StudentsManagement.searchId();
-                        break;
-                    case 5:
-                        System.out.println("Closing program");
-                        endProgram = true;
-                        break;
-                    default:
-                        System.out.println("Invalid option. please, introduce a valid one");
-                }
+        boolean endProgram = false;
+        while (!endProgram) {
+            switch (menuManagement()) {
+                case 1:
+                    StudentsManagement.showStudents();
+                    break;
+                case 2:
+                    sorting();
+                    break;
+                case 3:
+                    filter();
+                    break;
+                case 4:
+                    StudentsManagement.searchId();
+                    break;
+                case 5:
+                    System.out.println("returning...");
+                    endProgram = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. please, introduce a valid one");
             }
+        }
     }
-    
+
     public static int menuManagement() {
         Scanner keyboard = new Scanner(System.in);
 
@@ -259,30 +263,29 @@ public class GestionAlumnos {
             return 0;
         }
     }
-    
+
     /*--------------------------*/
-    
-    public static void sorting(){
+    public static void sorting() {
         //Menu inicial
-            boolean endProgram = false;
-            while (!endProgram) {
-                switch (sortingMenu()) {
-                    case 1:
-                        StudentsManagement.orderBySurnameAndName();
-                        break;
-                    case 2:
-                        StudentsManagement.orderByAge();
-                        break;
-                    case 3:
-                        System.out.println("returning...");
-                        endProgram = true;
-                        break;
-                    default:
-                        System.out.println("Invalid option. please, introduce a valid one");
-                }
+        boolean endProgram = false;
+        while (!endProgram) {
+            switch (sortingMenu()) {
+                case 1:
+                    StudentsManagement.orderBySurnameAndName();
+                    break;
+                case 2:
+                    StudentsManagement.orderByAge();
+                    break;
+                case 3:
+                    System.out.println("returning...");
+                    endProgram = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. please, introduce a valid one");
             }
+        }
     }
-    
+
     public static int sortingMenu() {
         Scanner keyboard = new Scanner(System.in);
 
@@ -299,34 +302,32 @@ public class GestionAlumnos {
             return 0;
         }
     }
-    
-    /*--------------------------*/    
-    
-    
-    public static void filter(){
+
+    /*--------------------------*/
+    public static void filter() {
         //Menu inicial
-            boolean endProgram = false;
-            while (!endProgram) {
-                switch (filterMenu()) {
-                    case 1:
-                        StudentsManagement.filterByGroup();
-                        break;
-                    case 2:
-                        StudentsManagement.filterByGender();
-                        break;
-                    case 3:
-                        StudentsManagement.filterByGrades();
-                        break;
-                    case 4:
-                        System.out.println("returning...");
-                        endProgram = true;
-                        break;
-                    default:
-                        System.out.println("Invalid option. please, introduce a valid one");
-                }
+        boolean endProgram = false;
+        while (!endProgram) {
+            switch (filterMenu()) {
+                case 1:
+                    StudentsManagement.filterByGroup();
+                    break;
+                case 2:
+                    StudentsManagement.filterByGender();
+                    break;
+                case 3:
+                    StudentsManagement.filterByGrades();
+                    break;
+                case 4:
+                    System.out.println("returning...");
+                    endProgram = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. please, introduce a valid one");
             }
+        }
     }
-    
+
     public static int filterMenu() {
         Scanner keyboard = new Scanner(System.in);
 
@@ -343,5 +344,5 @@ public class GestionAlumnos {
             System.out.println("Invalid input. Please, introduce a number");
             return 0;
         }
-    }    
+    }
 }

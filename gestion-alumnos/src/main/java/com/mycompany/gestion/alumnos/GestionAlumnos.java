@@ -30,8 +30,6 @@ public class GestionAlumnos {
         String user = "root";
         String password = "";
 
-        ArrayList<Student> myStudents = new ArrayList<>();
-
         try {
             //cargamos el driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -89,7 +87,7 @@ public class GestionAlumnos {
             return 0;
         }
     }
-
+    
     public static void addStudent(Connection conexion) {
         Scanner keyboard = new Scanner(System.in);
         try {

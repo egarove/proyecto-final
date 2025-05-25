@@ -210,8 +210,130 @@ public class GestionAlumnos {
         return students;
     }
     
+    
+    /*--------------------------*/
     public static void manageStudents(ArrayList<Student> students){
-        //NO TOCAR
         //Aquí se crearán las opciones para filtrar por cada campo
+//        StudentsManagement.setStudents(students);
+        //Menu inicial
+            boolean endProgram = false;
+            while (!endProgram) {
+                switch (menuManagement()) {
+                    case 1:
+//                        StudentsManagement.showStudents();
+                        break;
+                    case 2:
+                        sorting();
+                        break;
+                    case 3:
+                        filter();
+                        break;
+                    case 4:
+                        System.out.println("Closing program");
+                        endProgram = true;
+                    default:
+                        System.out.println("Invalid option. please, introduce a valid one");
+                }
+            }
     }
+    
+    public static int menuManagement() {
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("1. Show Students");
+        System.out.println("2. Sort students");
+        System.out.println("3. Filter");
+        System.out.println("4. Exit");
+
+        try {
+            int choice = keyboard.nextInt();
+            return choice;
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please, introduce a number");
+            return 0;
+        }
+    }
+    
+    /*--------------------------*/
+    
+    public static void sorting(){
+        //Menu inicial
+            boolean endProgram = false;
+            while (!endProgram) {
+                switch (sortingMenu()) {
+                    case 1:
+//                        StudentsManagement.ordenarPorName();
+                        break;
+                    case 2:
+//                        StudentsManagement.ordenarPorAge();
+                        break;
+                    case 3:
+                        System.out.println("Closing program");
+                        endProgram = true;
+                    default:
+                        System.out.println("Invalid option. please, introduce a valid one");
+                }
+            }
+    }
+    
+    public static int sortingMenu() {
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Choose sorting method");
+        System.out.println("1. by name/surname");
+        System.out.println("2. by age");
+        System.out.println("3. Exit");
+
+        try {
+            int choice = keyboard.nextInt();
+            return choice;
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please, introduce a number");
+            return 0;
+        }
+    }
+    
+    /*--------------------------*/    
+    
+    
+    public static void filter(){
+        //Menu inicial
+            boolean endProgram = false;
+            while (!endProgram) {
+                switch (filterMenu()) {
+                    case 1:
+                        StudentsManagement.filterByGroup();
+                        break;
+                    case 2:
+                        StudentsManagement.filterByGender();
+                        break;
+                    case 3:
+                        StudentsManagement.filterByGrades();
+                        break;
+                    case 4:
+                        System.out.println("Closing program");
+                        endProgram = true;
+                    default:
+                        System.out.println("Invalid option. please, introduce a valid one");
+                }
+            }
+    }
+    
+    public static int filterMenu() {
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Choose filter method");
+        System.out.println("1. by group");
+        System.out.println("2. by gender");
+        System.out.println("3. by score");
+        System.out.println("4. Exit");
+
+        try {
+            int choice = keyboard.nextInt();
+            return choice;
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please, introduce a number");
+            return 0;
+        }
+    }    
 }

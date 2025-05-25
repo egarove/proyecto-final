@@ -18,7 +18,7 @@ import java.util.Arrays;
  *
  * @author Sebasugami
  */
-public class Student {
+public class Student implements Comparable<Student> {
     private int id;
     private String name;
     private String surname;
@@ -174,6 +174,14 @@ public class Student {
     public String toString() {
         return "Student{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", studentClass=" + studentClass + ", dni=" + dni + ", age=" + age + ", gender=" + gender + ", phoneNumber=" + phoneNumber + ", grades=" + grades + '}';
     }
-    
-    
+
+    @Override
+    public int compareTo(Student o) {
+        int compare = this.getSurname().compareToIgnoreCase(o.getSurname());
+        if(compare==0){
+            return this.getName().compareToIgnoreCase(o.getName());
+        } else {
+            return compare;
+        }
+    }
 }

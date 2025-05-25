@@ -90,14 +90,6 @@ public class GestionAlumnos {
         }
     }
 
-    public static void listStudents(ArrayList<Student> myStudents) {
-        System.out.println("\n---SHOWING STUDENTS---");
-        for (Object myStudent : myStudents) {
-            System.out.println(myStudent);
-        }
-        System.out.println("---END OF THE LIST---");
-    }
-
     public static void addStudent(Connection conexion) {
         Scanner keyboard = new Scanner(System.in);
         try {

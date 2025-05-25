@@ -84,4 +84,24 @@ public class StudentsManagement {
     public static void orderByAge(){
         students.stream().sorted(Comparator.comparing(Student::getAge)).forEach(System.out::println);
     }
+    
+    public static void searchId(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce an id");
+        int id = sc.nextInt();
+        boolean found= false; 
+        
+        try {
+            for (Student student : students) {
+                if(student.getId()==id){
+                    System.out.println(student);
+                    found = true;
+                }
+            }
+            if (!found) System.out.println("id: "+id+"id does not exists.");
+        } catch (InputMismatchException ex) {
+            System.out.println("Invalid input");
+        }
+    }
 }

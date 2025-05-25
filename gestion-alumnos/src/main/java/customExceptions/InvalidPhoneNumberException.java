@@ -8,7 +8,7 @@ package customExceptions;
  *
  * @author Sebasugami
  */
-public class InvalidPhoneNumberException extends Exception{
+public class InvalidPhoneNumberException extends StudentCreationException{
 
     public InvalidPhoneNumberException(String message) {
         super(message);

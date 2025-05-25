@@ -8,7 +8,7 @@ package customExceptions;
  *
  * @author Sebasugami
  */
-public class InvalidDniException extends Exception{
+public class InvalidDniException extends StudentCreationException{
 
     public InvalidDniException(String message) {
         super(message);

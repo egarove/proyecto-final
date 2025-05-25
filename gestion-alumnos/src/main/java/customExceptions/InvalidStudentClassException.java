@@ -8,7 +8,7 @@ package customExceptions;
  *
  * @author Sebasugami
  */
-public class InvalidStudentClassException extends Exception{
+public class InvalidStudentClassException extends StudentCreationException{
 
     public InvalidStudentClassException(String message) {
         super(message);

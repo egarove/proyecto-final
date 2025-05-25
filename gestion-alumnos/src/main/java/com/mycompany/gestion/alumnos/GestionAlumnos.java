@@ -77,7 +77,7 @@ public class GestionAlumnos {
                 
                 //MOSTRAR MENU
                 int choice= 0;
-                while(choice!= 1 && choice != 2 && choice!= 3){
+                while(choice <1 || choice >3){
                     choice= menu();
                 }
                 switch (choice) {

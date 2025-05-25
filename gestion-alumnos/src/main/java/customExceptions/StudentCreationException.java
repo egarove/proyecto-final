@@ -8,9 +8,9 @@ package customExceptions;
  *
  * @author Sebasugami
  */
-public class InvalidAgeException extends StudentCreationException{
+public class StudentCreationException extends Exception{
 
-    public InvalidAgeException(String message) {
+    public StudentCreationException(String message) {
         super(message);
     }
     

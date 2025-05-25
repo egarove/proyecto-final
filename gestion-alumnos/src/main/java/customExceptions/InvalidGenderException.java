@@ -8,7 +8,7 @@ package customExceptions;
  *
  * @author Sebasugami
  */
-public class InvalidGenderException extends Exception{
+public class InvalidGenderException extends StudentCreationException{
 
     public InvalidGenderException(String message) {
         super(message);

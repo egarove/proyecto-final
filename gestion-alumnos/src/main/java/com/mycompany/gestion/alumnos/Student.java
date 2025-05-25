@@ -93,7 +93,7 @@ public class Student {
                         dniIsValid = false;
                     }
                 }else{
-                    if(Character.isDigit(dni.charAt(i))){
+                    if(!Character.isDigit(dni.charAt(i))){
                         dniIsValid = false;
                     }
                 }
@@ -166,7 +166,7 @@ public class Student {
         } else{
             grades[0] = g1;
             grades[1] = g2;
-            grades[3] = g3;
+            grades[2] = g3;
         }
     }
 }

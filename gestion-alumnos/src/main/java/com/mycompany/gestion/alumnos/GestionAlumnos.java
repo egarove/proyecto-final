@@ -107,7 +107,8 @@ public class GestionAlumnos {
             System.out.print("Introduce name: ");
             String name = keyboard.next();
             System.out.print("Introduce surname: ");
-            String surname = keyboard.next();
+            keyboard.nextLine(); // limpiar buffer 
+            String surname = keyboard.nextLine();   
             System.out.print("Introduce class: ");
             char studentClass = keyboard.next().charAt(0);
             System.out.print("Introduce dni: ");
@@ -140,6 +141,7 @@ public class GestionAlumnos {
                         + score1 + ", " + score2 + ", " + score3 + ");"
                 );
             }
+            System.out.println("Student added succesfully!");
         } catch (StudentCreationException ex) {
             System.out.println("Student creation interrupted. Reason: " + ex.getMessage());
         } catch (SQLException ex) {

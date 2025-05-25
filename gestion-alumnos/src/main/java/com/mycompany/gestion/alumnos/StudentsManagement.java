@@ -6,6 +6,7 @@ package com.mycompany.gestion.alumnos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class StudentsManagement {
         StudentsManagement.students = students;
     }
 
-    private static void showStudents() {
+    public static void showStudents() {
         if (students.isEmpty()) {
             System.out.println("There're no students!");
         } else {
@@ -31,7 +32,7 @@ public class StudentsManagement {
         }
     }
 
-    private static void filterByGroup() {
+    public static void filterByGroup() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Introduce a group");
@@ -50,7 +51,7 @@ public class StudentsManagement {
         }
     }
     
-    private static void filterByGrades(){
+    public static void filterByGrades(){
         //Separar los alumnos aprobados de los suspensos
         List<Student> approvedStudents = students.stream().filter(st -> Arrays.stream(st.getGrades()).average().getAsDouble() >= 5).collect(Collectors.toList());
         List<Student> failedStudents = students.stream().filter(st -> Arrays.stream(st.getGrades()).average().getAsDouble() < 5).collect(Collectors.toList());
@@ -63,7 +64,7 @@ public class StudentsManagement {
         failedStudents.forEach(System.out::println);
     }
 
-    private static void filterByGender(){
+    public static void filterByGender(){
         //Separar los hombres y las mujeres
         List<Student> maleStudents = students.stream().filter(st -> st.getGender() == 'M').collect(Collectors.toList());
         List<Student> femaleStudents = students.stream().filter(st -> st.getGender() == 'F').collect(Collectors.toList());
@@ -74,5 +75,13 @@ public class StudentsManagement {
         System.out.println("-----------------------------");
         System.out.println("Women:" + femaleStudents.stream().count());
         femaleStudents.forEach(System.out::println);
+    }
+    
+    public static void orderBySurnameAndName(){
+        students.stream().sorted().forEach(System.out::println);
+    }
+    
+    public static void orderByAge(){
+        students.stream().sorted(Comparator.comparing(Student::getAge)).forEach(System.out::println);
     }
 }

@@ -56,6 +56,7 @@ public class GestionAlumnos {
                     case 4:
                         System.out.println("Closing program");
                         endProgram = true;
+                        break;
                     default:
                         System.out.println("Invalid option. please, introduce a valid one");
                 }
@@ -214,13 +215,13 @@ public class GestionAlumnos {
     /*--------------------------*/
     public static void manageStudents(ArrayList<Student> students){
         //Aquí se crearán las opciones para filtrar por cada campo
-//        StudentsManagement.setStudents(students);
+        StudentsManagement.setStudents(students);
         //Menu inicial
             boolean endProgram = false;
             while (!endProgram) {
                 switch (menuManagement()) {
                     case 1:
-//                        StudentsManagement.showStudents();
+                        StudentsManagement.showStudents();
                         break;
                     case 2:
                         sorting();
@@ -262,14 +263,15 @@ public class GestionAlumnos {
             while (!endProgram) {
                 switch (sortingMenu()) {
                     case 1:
-//                        StudentsManagement.ordenarPorName();
+                        StudentsManagement.orderBySurnameAndName();
                         break;
                     case 2:
-//                        StudentsManagement.ordenarPorAge();
+                        StudentsManagement.orderByAge();
                         break;
                     case 3:
-                        System.out.println("Closing program");
+                        System.out.println("returning...");
                         endProgram = true;
+                        break;
                     default:
                         System.out.println("Invalid option. please, introduce a valid one");
                 }
@@ -311,8 +313,9 @@ public class GestionAlumnos {
                         StudentsManagement.filterByGrades();
                         break;
                     case 4:
-                        System.out.println("Closing program");
+                        System.out.println("returning...");
                         endProgram = true;
+                        break;
                     default:
                         System.out.println("Invalid option. please, introduce a valid one");
                 }

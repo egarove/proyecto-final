@@ -47,7 +47,7 @@ public class GestionAlumnos {
             while (!endProgram) {
                 switch (menu()) {
                     case 1:
-                        manageStudents(conexion);
+                        manageStudents(getStudents(conexion));
                         break;
                     case 2:
                         addStudent(conexion);
@@ -182,7 +182,7 @@ public class GestionAlumnos {
         return false;
     }
 
-    public static void manageStudents(Connection conexion) {
+    public static ArrayList<Student> getStudents(Connection conexion) {
         ArrayList<Student> students = new ArrayList<>(); //en este arrayList se recopilan todos los alumnos para usar sus datos
 
         //recopilamos todos los alumnos de la base de datos y los añadimos al arraylist students
@@ -216,5 +216,11 @@ public class GestionAlumnos {
             System.out.println("something went wrong while creating each student");
         }
 
+        return students;
+    }
+    
+    public static void manageStudents(ArrayList<Student> students){
+        //NO TOCAR
+        //Aquí se crearán las opciones para filtrar por cada campo
     }
 }

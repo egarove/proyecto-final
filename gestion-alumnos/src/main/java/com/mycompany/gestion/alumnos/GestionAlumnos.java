@@ -177,7 +177,7 @@ public class GestionAlumnos {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Something went wrong while checking if the student exist");
+            System.out.println("Something went wrong while checking if the student exists");
         }
         return false;
     }
@@ -202,7 +202,6 @@ public class GestionAlumnos {
                 double score2 = resultado.getDouble("nota2trim");
                 double score3 = resultado.getDouble("nota3trim");
 
-                System.out.println(score1);
 
                 Student student = new Student(id, name, surname, studentClass,
                         dni, age, gender, phoneNumber, score1, score2, score3);

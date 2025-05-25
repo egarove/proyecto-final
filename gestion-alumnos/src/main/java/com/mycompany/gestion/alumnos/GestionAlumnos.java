@@ -30,8 +30,6 @@ public class GestionAlumnos {
         String user = "root";
         String password = "";
 
-        ArrayList<Student> myStudents = new ArrayList<>();
-
         try {
             //cargamos el driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -89,15 +87,7 @@ public class GestionAlumnos {
             return 0;
         }
     }
-
-    public static void listStudents(ArrayList<Student> myStudents) {
-        System.out.println("\n---SHOWING STUDENTS---");
-        for (Object myStudent : myStudents) {
-            System.out.println(myStudent);
-        }
-        System.out.println("---END OF THE LIST---");
-    }
-
+    
     public static void addStudent(Connection conexion) {
         Scanner keyboard = new Scanner(System.in);
         try {

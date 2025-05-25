@@ -29,7 +29,7 @@ public class Student {
     private String phoneNumber;
     private double[] grades = new double[3];
 
-    public Student(int id, String name, String surname, char studentClass, String dni, int age, String gender, String phoneNumber, Date entryDate, double grade1, double grade2, double grade3) 
+    public Student(int id, String name, String surname, char studentClass, String dni, int age, String gender, String phoneNumber, double grade1, double grade2, double grade3) 
     throws InvalidAgeException, InvalidDniException, InvalidGenderException, InvalidGradeException, InvalidPhoneNumberException, InvalidStudentClassException{
         setId(id);
         setName(name);

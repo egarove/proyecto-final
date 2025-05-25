@@ -57,7 +57,7 @@ public class GestionAlumnos {
                     char studentClass= resultado.getString("clase").charAt(0);
                     String dni= resultado.getString("dni");
                     int age= resultado.getInt("edad");
-                    char gender= resultado.getString("genero").charAt(0);
+                    String gender= resultado.getString("genero");
                     String phoneNumber= resultado.getString("telefono");
                     double score1= resultado.getDouble("nota1trim");
                     double score2= resultado.getDouble("nota2trim");
@@ -140,7 +140,7 @@ public class GestionAlumnos {
         System.out.print("Introduce age: ");
         int age= keyboard.nextInt();
         System.out.print("Introduce gender: ");
-        char gender= keyboard.next().charAt(0);
+        String gender= keyboard.next();
         System.out.print("Introduce phone number: ");
         String phone= keyboard.next();
         System.out.print("Introduce first score: ");
@@ -154,8 +154,7 @@ public class GestionAlumnos {
             System.out.println("this id already exists!");
         } else{
             try{
-                Student alumno= new Student (id,name,surname,studentClass,dni,age,gender,
-                phone,score1,score2,score3);
+                Student alumno= new Student (id,name,surname,studentClass,dni,age,gender, phone,score1,score2,score3);
             
                 myStudents.add(alumno);
             
@@ -198,7 +197,7 @@ public class GestionAlumnos {
     }
     
     public static boolean studentExists(int idRemove, ArrayList<Student> myStudents){
-        for (Object myStudent : myStudents) {
+        for (Student myStudent : myStudents) {
             if(myStudent.getId()==idRemove) return true;
         }
         return false;

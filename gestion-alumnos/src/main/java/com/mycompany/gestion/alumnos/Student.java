@@ -174,7 +174,7 @@ public class Student implements Comparable<Student> {
     public String toString() {
         String msg = ("ID:" + id + " | " + name + " " + surname + " | Age: " + age + " | Gender: " + gender + 
                 " | Phone number: " + phoneNumber + " | DNI: " + dni + " | Group: " + studentClass + " | Grades: " +
-                grades[0] + " " + grades[1] + " " + grades[2] + " | Average: " + Arrays.stream(grades).average() );
+                grades[0] + " " + grades[1] + " " + grades[2] + " | Average: " + Arrays.stream(grades).average().getAsDouble() );
         
         return msg;
     }

@@ -169,4 +169,11 @@ public class Student {
             grades[2] = g3;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", studentClass=" + studentClass + ", dni=" + dni + ", age=" + age + ", gender=" + gender + ", phoneNumber=" + phoneNumber + ", grades=" + grades + '}';
+    }
+    
+    
 }

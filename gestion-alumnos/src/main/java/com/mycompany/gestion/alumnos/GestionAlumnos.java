@@ -230,8 +230,12 @@ public class GestionAlumnos {
                         filter();
                         break;
                     case 4:
+                        StudentsManagement.searchId();
+                        break;
+                    case 5:
                         System.out.println("Closing program");
                         endProgram = true;
+                        break;
                     default:
                         System.out.println("Invalid option. please, introduce a valid one");
                 }
@@ -244,7 +248,8 @@ public class GestionAlumnos {
         System.out.println("1. Show Students");
         System.out.println("2. Sort students");
         System.out.println("3. Filter");
-        System.out.println("4. Exit");
+        System.out.println("4. Search id");
+        System.out.println("5. Exit");
 
         try {
             int choice = keyboard.nextInt();
